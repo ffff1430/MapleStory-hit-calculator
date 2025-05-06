@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>怪物命中率計算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 12px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 100%;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>怪物命中率計算器</h1>
+    <label for="monsterLevel">怪物等級：</label>
+    <input type="number" id="monsterLevel" required>
+
+    <label for="playerLevel">自身等級：</label>
+    <input type="number" id="playerLevel" required>
+
+    <label for="monsterEvasion">怪物迴避：</label>
+    <input type="number" id="monsterEvasion" required>
+
+    <button onclick="calculate()">計算命中所需命中值</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculate() {
+            const monsterLevel = parseFloat(document.getElementById('monsterLevel').value);
+            const playerLevel = parseFloat(document.getElementById('playerLevel').value);
+            const monsterEvasion = parseFloat(document.getElementById('monsterEvasion').value);
+
+            if (isNaN(monsterLevel) || isNaN(playerLevel) || isNaN(monsterEvasion)) {
+                document.getElementById('result').textContent = '請填寫所有欄位';
+                return;
+            }
+
+            const result = ((monsterLevel - playerLevel) / 7.5 + 3.67) * monsterEvasion;
+            document.getElementById('result').textContent = `計算結果：${result.toFixed(2)}`;
+        }
+    </script>
+</body>
+
+</html>
